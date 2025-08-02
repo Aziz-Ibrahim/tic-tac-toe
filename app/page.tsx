@@ -35,6 +35,13 @@ export default function Home() {
     })
   }, [cells]);
 
+  useEffect(() => {
+    if (cells.every((cell) => cell !== "") && !winningMessage){
+      setWinningMessage("Draw!")
+    }
+
+  }, [cells, winningMessage])
+
   // Render the gameboard with cells
   return (
       <div className="container" >
