@@ -7,11 +7,16 @@ type CellProps = {
     cells: string[];
     setCells: Dispatch<SetStateAction<string[]>>;
     cell: string;
+    winningMessage?: string;
 };
 
-const Cell = ({ go, setGo, id, cells, setCells, cell }: CellProps) => {
+const Cell = ({ go, setGo, id, cells, setCells, cell, winningMessage }: CellProps) => {
 
     const handleClick = (e) => {
+        // Prevent further clicks if there's a winner
+        if (winningMessage) {
+            return
+        };
         const notTaken = !cells[id]
         // Check if the cell is not already taken
         if (notTaken) {

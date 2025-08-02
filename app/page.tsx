@@ -19,10 +19,20 @@ export default function Home() {
   // Import the Cell component
   const [cells, setCells] = useState(["", "", "", "", "", "", "", "", ""]);
   const [go, setGo] = useState("circle");
+  const [winningMessage, setWinningMessage] = useState("");
 
   useEffect(() => {
     // Check for a winner after each move
-    WiningCombinations.forEach(combination => {})
+    WiningCombinations.forEach(combination => {
+      const circleWins = combination.every((cell) => cells[cell] === "circle");
+      const crossWins = combination.every((cell) => cells[cell] === "cross");
+      // Handle the win logic
+      if (circleWins) {
+        setWinningMessage("Circle wins!");
+      } else if (crossWins) {
+        setWinningMessage("Cross wins!");
+      }
+    })
   }, [cells]);
 
   // Render the gameboard with cells
@@ -41,9 +51,10 @@ export default function Home() {
             />
           ))}
         </div>
-        <div className="status">
+        <div><h1>{winningMessage}</h1></div>
+        {!winningMessage && <div className="status">
           <h2>Next turn: {go === "circle" ? "O" : "X"}</h2>
-        </div>
+        </div>}
       </div>
   );
 }
