@@ -38,6 +38,13 @@ export default function Home() {
   useEffect(() => {
     if (cells.every((cell) => cell !== "") && !winningMessage){
       setWinningMessage("Draw!")
+    } else if (winningMessage) {
+      // Reset the game if there's a winner
+      setTimeout(() => {
+        setCells(["", "", "", "", "", "", "", "", ""]);
+        setGo("circle");
+        setWinningMessage("");
+      }, 2000); // Reset after 2 seconds
     }
 
   }, [cells, winningMessage])
