@@ -12,7 +12,7 @@ type CellProps = {
 
 const Cell = ({ go, setGo, id, cells, setCells, cell, winningMessage }: CellProps) => {
 
-    const handleClick = (e) => {
+    const handleClick = () => {
         // Prevent further clicks if there's a winner
         if (winningMessage) {
             return
